@@ -7,6 +7,7 @@ CXXFLAGS += -O2 -Wall -Wextra -Wno-deprecated-declarations # We want to use gets
 LDFLAGS  += -s
 
 .PHONY: all clean
+.DELETE_ON_ERROR:
 
 all: $(TARGET)
 
