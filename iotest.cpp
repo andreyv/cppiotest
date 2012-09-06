@@ -58,11 +58,7 @@ inline int read_int()
 {
     char c;
 
-    do
-    {
-        c = getchar();
-    }
-    while (c <= ' ');
+    while (c = getchar(), c <= ' ');
 
 #ifdef USE_SIGN
     bool sign = c == '-';
