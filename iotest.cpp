@@ -11,6 +11,8 @@
 
 using namespace std;
 
+//#define USE_SIGN // Define this to have signed custom int I/O
+
 const int limit   = 10000000; // How many objects to output
 const int retries = 3;        // How many times to run each test
 
@@ -28,30 +30,28 @@ inline void init()
 // TODO: Can these functions be further sped up?
 //
 
-inline void write_int_inner(int x)
-{
-    if (x)
-    {
-        write_int_inner(x / 10);
-        putchar('0' + x % 10);
-    }
-}
-
 inline void write_int(int x)
 {
-    if (x == 0)
-    {
-        putchar('0');
-        return;
-    }
-
+#ifdef USE_SIGN
     if (x < 0)
     {
         putchar('-');
         x = -x;
     }
+#endif
 
-    write_int_inner(x);
+    char buf[10], *p = buf;
+    do
+    {
+        *p++ = '0' + x % 10;
+        x /= 10;
+    }
+    while (x);
+    do
+    {
+        putchar(*--p);
+    }
+    while (p > buf);
 }
 
 inline int read_int()
@@ -62,22 +62,33 @@ inline int read_int()
     {
         c = getchar();
     }
-    while (isspace(c));
+    while (c <= ' ');
 
+#ifdef USE_SIGN
     bool sign = c == '-';
     if (sign)
     {
         c = getchar();
     }
+#endif
 
     int res = c - '0';
-    while (isdigit(c = getchar()))
+    while (true)
     {
+        c = getchar();
+        if (c < '0' || c > '9')
+        {
+            break;
+        }
         res = res * 10 + (c - '0');
     }
     // One character is gobbled here
 
+#ifdef USE_SIGN
     return sign ? -res : res;
+#else
+    return res;
+#endif
 }
 
 //
