@@ -73,13 +73,8 @@ inline int read_int()
 #endif
 
     int res = c - '0';
-    while (true)
+    while (c = getchar(), c >= '0' && c <= '9')
     {
-        c = getchar();
-        if (c < '0' || c > '9')
-        {
-            break;
-        }
         res = res * 10 + (c - '0');
     }
     // One character is gobbled here
