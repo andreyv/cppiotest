@@ -217,6 +217,14 @@ const char   s[] = "abcdefghijklmnop";
 const string str(s);
 char         buf[sizeof(s)];
 
+void str_printf()
+{
+    for (int i = 0; i < limit; i++)
+    {
+        printf("%s\n", s);
+    }
+}
+
 void str_puts()
 {
     for (int i = 0; i < limit; i++)
@@ -240,6 +248,14 @@ void string_cout()
     for (int i = 0; i < limit; i++)
     {
         cout << str << '\n';
+    }
+}
+
+void str_scanf()
+{
+    for (int i = 0; i < limit; i++)
+    {
+        scanf("%s", buf);
     }
 }
 
@@ -314,9 +330,11 @@ const test_entry entries[] = {
     { "char, cout",      char_cout,      OUT },
     { "char, getchar",   char_getchar,   IN  },
     { "char, cin",       char_cin,       IN  },
+    { "char *, printf",  str_printf,     OUT },
     { "char *, puts",    str_puts,       OUT },
     { "char *, cout",    str_cout,       OUT },
     { "string, cout",    string_cout,    OUT },
+    { "char *, scanf",   str_scanf,      IN  },
     { "char *, gets",    str_gets,       IN  },
     { "char *, cin",     str_cin,        IN  },
     { "string, getline", string_getline, IN  }
